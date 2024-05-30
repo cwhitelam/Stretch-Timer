@@ -1,0 +1,262 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.light-mode {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+.toggle-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.content {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.left {
+    width: 25%;
+    padding: 20px;
+    box-sizing: border-box;
+    border-right: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.preset {
+    flex-grow: 1;
+}
+
+.preset h3 {
+    margin-top: 0;
+}
+
+.preset-timers {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 15px;
+    height: 95%;
+    box-sizing: border-box;
+    padding-bottom: 20px;
+}
+
+.preset-card {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.preset-card:hover {
+    background-color: #e0e0e0;
+}
+
+.dark-mode .preset-card {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.dark-mode .preset-card:hover {
+    background-color: #444444;
+}
+
+.preset-card .time {
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+
+.preset-card .unit {
+    font-size: 1.3rem;
+}
+
+.custom-timer {
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.dark-mode .custom-timer {
+    background-color: #333333;
+    color: #ffffff;
+}
+
+.custom-timer h3 {
+    margin-top: 0;
+}
+
+.input-group {
+    margin-bottom: 10px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.button-group button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    flex: 1;
+    margin-right: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #ffffff;
+    transition: background-color 0.3s;
+}
+
+.button-group button:hover {
+    background-color: #0056b3;
+}
+
+.button-group button:last-child {
+    margin-right: 0;
+}
+
+.timer-buttons {
+    margin-top: 20px;
+    justify-content: center;
+}
+
+.timer-buttons button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 2rem;
+    flex: none;
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.right {
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.timer {
+    font-size: 26rem;
+    transition: color 0.5s, text-shadow 0.5s;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.glow-green {
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+}
+
+.glow-red {
+    color: #ff0000;
+    text-shadow: 0 0 10px #ff0000;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.playpause label {
+    display: block;
+    box-sizing: border-box;
+    width: 0;
+    height: 150px;
+    border-color: transparent transparent transparent #202020;
+    transition: 100ms all ease;
+    cursor: pointer;
+    border-style: double;
+    border-width: 0 0 0 120px;
+}
+
+.playpause input[type="checkbox"] {
+    visibility: hidden;
+}
+
+.playpause input[type="checkbox"]:checked + label {
+    border-style: solid;
+    border-width: 75px 75px 75px 120px;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    font-size: 3rem;
+    color: inherit;
+}
+
+.stop button {
+    background: none;
+    border: 4px solid #202020;
+    width: 150px;
+    height: 150px;
+    color: inherit;
+    cursor: pointer;
+    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
