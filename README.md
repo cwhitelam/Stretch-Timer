@@ -11,28 +11,25 @@ A simple and intuitive web-based stretching interval timer to help you manage yo
 
 ## Screenshots
 
-![Screenshot 1](screenshot1.png)
-![Screenshot 2](screenshot2.png)
+
+![Screenshot 1](screenshots/wholeInterface.png)
+![Screenshot 2](screenshots/timerInUse.png)
 
 ## Getting Started
-
-### Prerequisites
-
-- Python 3.12 or higher
-- Flask (or any web server to serve the HTML file)
 
 ### Installation
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/stretch_timer_v2.git
+    git clone https://github.com/cwhitelam/stretch_timer_v2.git
     cd stretch_timer_v2
     ```
 
 2. Create and activate a virtual environment:
     ```bash
     python -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    source venv/bin/activate  
+    ## On Windows use `venv\Scripts\activate`
     ```
 
 3. Install the required packages:
@@ -58,22 +55,3 @@ A simple and intuitive web-based stretching interval timer to help you manage yo
 2. Use the play/pause toggle to start or stop the timer.
 3. Monitor the timer and listen for audio alerts indicating the start and end of intervals.
 4. Switch between dark and light modes using the toggle switch at the top.
-
-## Project Structure
-
-```plaintext
-.
-├── README.md
-├── app
-│   ├── __init__.py
-│   ├── routes.py
-├── templates
-│   └── index.html
-├── static
-│   ├── style.css
-│   ├── start.mp3
-│   ├── end.mp3
-├── run.py
-├── requirements.txt
-└── venv
-
