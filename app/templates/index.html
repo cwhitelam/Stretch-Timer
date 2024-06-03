@@ -198,11 +198,11 @@
         function updatePlayPauseLabel() {
             let playpauseLabel = document.getElementById('playpauseLabel');
             if (timerRunning) {
-                playpauseLabel.style.borderStyle = 'solid';
-                playpauseLabel.style.borderWidth = '37px 0 37px 60px';
-            } else {
                 playpauseLabel.style.borderStyle = 'double';
-                playpauseLabel.style.borderWidth = '0 0 0 60px';
+                playpauseLabel.style.borderWidth = '0 0 0 120px';
+            } else {
+                playpauseLabel.style.borderStyle = 'solid';
+                playpauseLabel.style.borderWidth = '75px 75px 75px 120px';
             }
         }
     </script>
