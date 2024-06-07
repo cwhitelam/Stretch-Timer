@@ -131,6 +131,18 @@ body {
     box-sizing: border-box;
     border-radius: 5px;
     border: 1px solid #ccc;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.light-mode .input-group input {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.dark-mode .input-group input {
+    background-color: #333333;
+    color: #ffffff;
+    border: 1px solid #555555;
 }
 
 .input-group input:focus {

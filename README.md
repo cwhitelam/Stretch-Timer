@@ -21,8 +21,8 @@ A simple and intuitive web-based stretching interval timer to help you manage yo
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/cwhitelam/stretch_timer_v2.git
-    cd stretch_timer_v2
+    git clone https://github.com/cwhitelam/stretch_timer
+    cd stretch_timer
     ```
 
 2. Create and activate a virtual environment:
