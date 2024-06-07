@@ -13,7 +13,6 @@ A simple and intuitive web-based stretching interval timer to help you manage yo
 
 
 ![Screenshot 1](app/screenshots/wholeInterface.png)
-![Screenshot 2](app/screenshots/timerInUse.png)
 
 ## Getting Started
 
