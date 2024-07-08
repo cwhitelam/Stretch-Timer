@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stretching Interval Timer</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
+
 <body class="dark-mode">
     <div class="container">
         <div class="toggle-container">
@@ -60,10 +62,22 @@
                         <label for="rest">Rest (seconds):</label>
                         <input type="number" id="rest" name="rest" value="10">
                     </div>
+                    <div class="toggle-group">
+                        <label for="toggleSwitch" class="switch-label">Incremental Stretching</label>
+                        <label class="switch">
+                            <input type="checkbox" id="toggleSwitch">
+                            <span class="slider round"></span>
+                            <span class="switch-state" data-on="On " data-off=" Off"></span>
+                        </label>
+                    </div>
+                    <div class="input-group increment">
+                        <label for="increment">Increment (seconds):</label>
+                        <input type="number" id="increment" name="increment" value="10">
+                    </div>
                     <div class="button-group">
                         <button id="startCustomTimerButton">Start</button>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="right">
@@ -78,145 +92,152 @@
                         <button id="resetButton" onclick="resetTimer()" disabled></button>
                     </div>
                 </div>
-            </div>            
+            </div>
         </div>
     </div>
     <audio id="startSound" src="/static/start.mp3"></audio>
     <audio id="endSound" src="/static/end.mp3"></audio>
     <script>
         let timerElement = document.getElementById('timer');
-let startSound = document.getElementById('startSound');
-let endSound = document.getElementById('endSound');
-let toggle = document.getElementById('toggle');
-let playPause = document.getElementById('playpause');
-let stopButton = document.getElementById('resetButton');
-let timerRunning = false; 
-let timerInterval;
-let duration, sets, rest, currentSet, currentDuration, isRestPeriod;
+        let startSound = document.getElementById('startSound');
+        let endSound = document.getElementById('endSound');
+        let toggle = document.getElementById('toggle');
+        let playPause = document.getElementById('playpause');
+        let stopButton = document.getElementById('resetButton');
+        let timerRunning = false;
+        let timerInterval;
+        let duration, sets, rest, currentSet, currentDuration, isRestPeriod;
 
-toggle.addEventListener('change', function() {
-    document.body.classList.toggle('dark-mode');
-    document.body.classList.toggle('light-mode');
-});
+        toggle.addEventListener('change', function () {
+            document.body.classList.toggle('dark-mode');
+            document.body.classList.toggle('light-mode');
+        });
 
-playPause.addEventListener('change', function() {
-    if (playPause.checked) {
-        startCustomTimer();
-    } else {
-        stopTimer();
-    }
-});
-
-stopButton.addEventListener('click', function() {
-    resetTimer();
-});
-
-function setPresetTimer(presetDuration) {
-    if (timerRunning) {
-        return; // If a timer is already running, ignore the start request
-    }
-    duration = presetDuration;
-    sets = 1;
-    rest = 0;
-    currentSet = 0;
-    currentDuration = duration;
-    isRestPeriod = false;
-    startTimer();
-    playPause.checked = true;
-    stopButton.disabled = false;
-}
-
-function startCustomTimer() {
-    if (timerRunning) {
-        return; // If a timer is already running, ignore the start request
-    }
-
-    duration = parseInt(document.getElementById('duration').value);
-    sets = parseInt(document.getElementById('sets').value);
-    rest = parseInt(document.getElementById('rest').value);
-    currentSet = 0;
-    currentDuration = duration;
-    isRestPeriod = false;
-    startTimer();
-}
-
-function startTimer() {
-    timerRunning = true;
-    updatePlayPauseLabel();
-    timerInterval = setInterval(updateTimer, 1000);
-    stopButton.disabled = false;
-}
-
-function updateTimer() {
-    if (!timerRunning) {
-        return;
-    }
-
-    if (currentDuration > 0) {
-        let minutes = Math.floor(currentDuration / 60);
-        let seconds = currentDuration % 60;
-        timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-        timerElement.classList.add(isRestPeriod ? 'glow-red' : 'glow-green');
-        timerElement.classList.remove(isRestPeriod ? 'glow-green' : 'glow-red');
-        currentDuration--;
-    } else {
-        if (isRestPeriod) {
-            isRestPeriod = false;
-            currentDuration = duration;
-            startSound.play();
-        } else {
-            currentSet++;
-            if (currentSet < sets) {
-                isRestPeriod = true;
-                currentDuration = rest;
+        playPause.addEventListener('change', function () {
+            if (playPause.checked) {
+                startCustomTimer();
             } else {
-                timerElement.textContent = "DONE";
-                timerElement.classList.remove('glow-green');
-                timerElement.classList.remove('glow-red');
-                endSound.play();
-                timerRunning = false;
-                clearInterval(timerInterval);
-                playPause.checked = false;
-                stopButton.disabled = true;
-                updatePlayPauseLabel();
+                stopTimer();
+            }
+        });
+
+        stopButton.addEventListener('click', function () {
+            resetTimer();
+        });
+
+        function setPresetTimer(presetDuration) {
+            if (timerRunning) {
+                return; // If a timer is already running, ignore the start request
+            }
+            duration = presetDuration;
+            sets = 1;
+            rest = 0;
+            currentSet = 0;
+            currentDuration = duration;
+            isRestPeriod = false;
+            startTimer();
+            playPause.checked = true;
+            stopButton.disabled = false;
+        }
+
+        function startCustomTimer() {
+            if (timerRunning) {
+                return; // If a timer is already running, ignore the start request
+            }
+
+            duration = parseInt(document.getElementById('duration').value);
+            sets = parseInt(document.getElementById('sets').value);
+            rest = parseInt(document.getElementById('rest').value);
+            currentSet = 0;
+            currentDuration = duration;
+            isRestPeriod = false;
+            startTimer();
+        }
+
+        function startTimer() {
+            timerRunning = true;
+            updatePlayPauseLabel();
+            timerInterval = setInterval(updateTimer, 1000);
+            stopButton.disabled = false;
+        }
+
+        function updateTimer() {
+            if (!timerRunning) {
+                return;
+            }
+
+            if (currentDuration > 0) {
+                let minutes = Math.floor(currentDuration / 60);
+                let seconds = currentDuration % 60;
+                timerElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                timerElement.classList.add(isRestPeriod ? 'glow-red' : 'glow-green');
+                timerElement.classList.remove(isRestPeriod ? 'glow-green' : 'glow-red');
+                currentDuration--;
+            } else {
+                if (isRestPeriod) {
+                    isRestPeriod = false;
+                    currentDuration = duration;
+                    startSound.play();
+                } else {
+                    currentSet++;
+                    if (currentSet < sets) {
+                        isRestPeriod = true;
+                        currentDuration = rest;
+                    } else {
+                        timerElement.textContent = "DONE";
+                        timerElement.classList.remove('glow-green');
+                        timerElement.classList.remove('glow-red');
+                        endSound.play();
+                        timerRunning = false;
+                        clearInterval(timerInterval);
+                        playPause.checked = false;
+                        stopButton.disabled = true;
+                        updatePlayPauseLabel();
+                    }
+                }
             }
         }
-    }
-}
 
-function stopTimer() {
-    timerRunning = false;
-    clearInterval(timerInterval);
-    updatePlayPauseLabel();
-}
+        function stopTimer() {
+            timerRunning = false;
+            clearInterval(timerInterval);
+            updatePlayPauseLabel();
+        }
 
-function resetTimer() {
-    timerRunning = false;
-    clearInterval(timerInterval);
-    timerElement.textContent = "00:00";
-    timerElement.classList.remove('glow-green');
-    timerElement.classList.remove('glow-red');
-    playPause.checked = false;
-    stopButton.disabled = true;
-    updatePlayPauseLabel();
-}
+        function resetTimer() {
+            timerRunning = false;
+            clearInterval(timerInterval);
+            timerElement.textContent = "00:00";
+            timerElement.classList.remove('glow-green');
+            timerElement.classList.remove('glow-red');
+            playPause.checked = false;
+            stopButton.disabled = true;
+            updatePlayPauseLabel();
+        }
 
-function updatePlayPauseLabel() {
-    let playpauseLabel = document.getElementById('playpauseLabel');
-    if (timerRunning) {
-        playpauseLabel.style.borderStyle = 'double';
-        playpauseLabel.style.borderWidth = '0 0 0 120px';
-    } else {
-        playpauseLabel.style.borderStyle = 'solid';
-        playpauseLabel.style.borderWidth = '75px 75px 75px 120px';
-    }
-}
+        function updatePlayPauseLabel() {
+            let playpauseLabel = document.getElementById('playpauseLabel');
+            if (timerRunning) {
+                playpauseLabel.style.borderStyle = 'double';
+                playpauseLabel.style.borderWidth = '0 0 0 120px';
+            } else {
+                playpauseLabel.style.borderStyle = 'solid';
+                playpauseLabel.style.borderWidth = '75px 75px 75px 120px';
+            }
+        }
 
-document.getElementById('startCustomTimerButton').addEventListener('click', function() {
-    startCustomTimer();
-});
+        document.getElementById('startCustomTimerButton').addEventListener('click', function () {
+            startCustomTimer();
+        });
 
+        document.getElementById('toggleSwitch').addEventListener('change', function () {
+            const incrementGroups = document.querySelectorAll('.input-group.increment');
+            incrementGroups.forEach(group => {
+                group.style.display = this.checked ? 'block' : 'none';
+            });
+        });
 
     </script>
 </body>
+
 </html>
