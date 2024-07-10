@@ -179,13 +179,10 @@
             } else {
                 if (isRestPeriod) {
                     isRestPeriod = false;
-                    currentDuration = duration + (incrementalStretching ? currentSet * increment : 0);
-                    startSound.play();
-                } else {
                     currentSet++;
                     if (currentSet < sets) {
-                        isRestPeriod = true;
-                        currentDuration = rest;
+                        currentDuration = duration + (incrementalStretching ? currentSet * increment : 0);
+                        startSound.play();
                     } else {
                         timerElement.textContent = "DONE";
                         timerElement.classList.remove('glow-green');
@@ -197,6 +194,15 @@
                         stopButton.disabled = true;
                         updatePlayPauseLabel();
                     }
+                } else {
+                    isRestPeriod = true;
+                    currentDuration = rest;
+                    startSound.play();
+                }
+
+                // Ensure the next state starts immediately
+                if (timerRunning) {
+                    updateTimer();
                 }
             }
         }
