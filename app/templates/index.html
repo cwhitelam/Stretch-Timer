@@ -106,7 +106,7 @@
         let stopButton = document.getElementById('resetButton');
         let timerRunning = false;
         let timerInterval;
-        let duration, sets, rest, currentSet, currentDuration, isRestPeriod;
+        let duration, sets, rest, currentSet, currentDuration, isRestPeriod, increment, incrementalStretching;
 
         toggle.addEventListener('change', function () {
             document.body.classList.toggle('dark-mode');
@@ -148,6 +148,9 @@
             duration = parseInt(document.getElementById('duration').value);
             sets = parseInt(document.getElementById('sets').value);
             rest = parseInt(document.getElementById('rest').value);
+            increment = parseInt(document.getElementById('increment').value);
+            incrementalStretching = document.getElementById('toggleSwitch').checked;
+
             currentSet = 0;
             currentDuration = duration;
             isRestPeriod = false;
@@ -176,7 +179,7 @@
             } else {
                 if (isRestPeriod) {
                     isRestPeriod = false;
-                    currentDuration = duration;
+                    currentDuration = duration + (incrementalStretching ? currentSet * increment : 0);
                     startSound.play();
                 } else {
                     currentSet++;
@@ -236,7 +239,6 @@
                 group.style.display = this.checked ? 'block' : 'none';
             });
         });
-
     </script>
 </body>
 
